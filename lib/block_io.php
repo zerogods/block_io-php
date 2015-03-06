@@ -86,8 +86,10 @@ class BlockIo
 
 	// it's a GET method
 	if ($method == 'GET') { $url .= '&' . $addedData; }
-
-	curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'TLSv1'); // enforce use of TLSv1
+	
+	// refer https://github.com/BlockIo/block_io-php/issues/5
+	// curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'TLSv1'); // enforce use of TLSv1
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // Verify peer
         curl_setopt($ch, CURLOPT_URL, $url);
 
 	if ($method == 'POST')
